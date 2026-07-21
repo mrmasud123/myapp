@@ -31,10 +31,16 @@ jobs:
       - name: Assemble deploy folder
         run: |
           mkdir -p deploy
+
           cp -r .next/standalone/. deploy/
+
           mkdir -p deploy/.next
           cp -r .next/static deploy/.next/static
-          cp -r public deploy/public
+
+          if [ -d public ]; then
+            cp -r public deploy/public
+          fi
+
           mkdir -p deploy/tmp
           date > deploy/tmp/restart.txt
 
